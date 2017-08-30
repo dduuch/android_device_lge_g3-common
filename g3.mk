@@ -90,7 +90,6 @@ PRODUCT_COPY_FILES += \
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
-    libbt-vendor \
     hwaddrs
 
 # Camera
@@ -113,6 +112,10 @@ PRODUCT_PACKAGES += \
     liboverlay
 
 # DRM
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.0-impl
+
+# FlipFlap
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl
 
@@ -230,7 +233,6 @@ PRODUCT_PACKAGES += \
 # Wifi
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
-    wificond \
     hostapd \
     libwpa_client \
     wpa_supplicant \
