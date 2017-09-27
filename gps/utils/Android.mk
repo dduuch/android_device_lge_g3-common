@@ -1,4 +1,4 @@
-#Compile this library only for builds with the latest modem image
+ifneq ($(BUILD_TINY_ANDROID),true)
 
 LOCAL_PATH := $(call my-dir)
 
@@ -53,7 +53,5 @@ LOCAL_MODULE_OWNER := qcom
 LOCAL_PROPRIETARY_MODULE := true
 
 LOCAL_MODULE_TAGS := optional
-
-LOCAL_PRELINK_MODULE := false
 
 include $(BUILD_SHARED_LIBRARY)
