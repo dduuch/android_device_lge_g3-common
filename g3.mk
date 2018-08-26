@@ -73,10 +73,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
-    android.hardware.audio@2.0-service \
     android.hardware.audio.effect@2.0-impl \
-    android.hardware.audio.effect@2.0-service \
-    audio.a2dp.default \
     audio.primary.msm8974 \
     audio_policy.msm8974 \
     audio.a2dp.default \
@@ -85,6 +82,9 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing
+
+#    android.hardware.audio@2.0-service \
+#    android.hardware.audio.effect@2.0-service \
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
@@ -95,10 +95,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
     libbt-vendor \
-    android.hardware.bluetooth@1.0-impl \
-    android.hardware.bluetooth@1.0-service \
     hwaddrs
 
+#    android.hardware.bluetooth@1.0-service \
 # hwaddr -> not in g2
 
 # Camera
@@ -124,8 +123,9 @@ PRODUCT_PACKAGES += \
 
 # DRM
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.0-impl \
-    android.hardware.drm@1.0-service
+    android.hardware.drm@1.0-impl
+
+#    android.hardware.drm@1.0-service
 
 # FlipFlap
 PRODUCT_PACKAGES += \
@@ -150,20 +150,23 @@ PRODUCT_PACKAGES += \
 
 # Keymaster
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl \
-    android.hardware.keymaster@3.0-service
+    android.hardware.keymaster@3.0-impl
+
+#    android.hardware.keymaster@3.0-service
 
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
-    android.hardware.light@2.0-service \
     lights.msm8974
+
+#    android.hardware.light@2.0-service \
 
 # Location
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl \
-    android.hardware.gnss@1.0-service \
     gps.msm8974
+
+#    android.hardware.gnss@1.0-service \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/izat.conf:system/etc/izat.conf
@@ -180,10 +183,11 @@ PRODUCT_COPY_FILES += \
 
 # NFC
 PRODUCT_PACKAGES += \
-    android.hardware.nfc@1.0-impl-bcm \
-    android.hardware.nfc@1.0-service \
+    android.hardware.nfc@1.0-impl \
     com.android.nfc_extras \
     Tag
+
+#    android.hardware.nfc@1.0-service \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/nfc/libnfc-brcm.conf:system/vendor/etc/libnfc-brcm.conf \
@@ -242,8 +246,9 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl \
-    android.hardware.sensors@1.0-service
+    android.hardware.sensors@1.0-impl
+
+#    android.hardware.sensors@1.0-service
 
 # Thermal
 PRODUCT_COPY_FILES += \
