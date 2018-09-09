@@ -73,18 +73,21 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
+    android.hardware.audio@2.0-service \
     android.hardware.audio.effect@2.0-impl \
-    audio.primary.msm8974 \
-    audio_policy.msm8974 \
+    android.hardware.audio.effect@2.0-service \
     audio.a2dp.default \
+    audio.primary.msm8974 \
     audio.r_submix.default \
     audio.usb.default \
+    libaudio-resampler \
     libqcompostprocbundle \
     libqcomvisualizer \
-    libqcomvoiceprocessing
+    libqcomvoiceprocessing \
+    libqcomvoiceprocessingdescriptors
 
-#    android.hardware.audio@2.0-service \
-#    android.hardware.audio.effect@2.0-service \
+# added:    libaudio-resampler and libqcomvoiceprocessingdescriptors
+# removed:  audio_policy.msm8974 \
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
@@ -93,19 +96,21 @@ PRODUCT_COPY_FILES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0-impl \
+    hwaddrs \
     libbt-vendor \
-    hwaddrs
-
-#    android.hardware.bluetooth@1.0-service \
-# hwaddr -> not in g2
+    android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-service
 
 # Camera
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl-legacy \
     camera.device@1.0-impl-legacy \
     Snap \
-    camera.msm8974
+    camera.msm8974 \
+    libshim_atomic \
+    libshim_camera_parameters
+
+# added libshim*
 
 # Display
 PRODUCT_PACKAGES += \
@@ -123,14 +128,32 @@ PRODUCT_PACKAGES += \
 
 # DRM
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.0-impl
+    android.hardware.drm@1.0-impl \
+    android.hardware.drm@1.0-service
 
-#    android.hardware.drm@1.0-service
+# added service
 
 # FlipFlap
 PRODUCT_PACKAGES += \
     FlipFlap
 
+# Location
+PRODUCT_PACKAGES += \
+    android.hardware.gnss@1.0-impl \
+    gps.msm8974
+
+# Ramdisk
+PRODUCT_PACKAGES += \
+    fstab.g3 \
+    init.g3.rc \
+    init.g3.power.rc \
+    init.g3.usb.rc \
+    init.msm8974.sensor.sh \
+    init.qcom.sh \
+    init.qcom.bt.sh \
+    init.baseband.sh \
+    init.sensors.sh \
+    ueventd.g3.rc
 # IPv6 tethering
 PRODUCT_PACKAGES += \
     ebtables \
@@ -150,23 +173,13 @@ PRODUCT_PACKAGES += \
 
 # Keymaster
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl
-
-#    android.hardware.keymaster@3.0-service
+    android.hardware.keymaster@3.0-impl \
+    android.hardware.keymaster@3.0-service
 
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
     lights.msm8974
-
-#    android.hardware.light@2.0-service \
-
-# Location
-PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl \
-    gps.msm8974
-
-#    android.hardware.gnss@1.0-service \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/izat.conf:system/etc/izat.conf
@@ -176,18 +189,12 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/vendor/etc/media_codecs.xml \
     $(LOCAL_PATH)/configs/media_profiles_V1_0.xml:system/vendor/etc/media_profiles_V1_0.xml
 
-PRODUCT_COPY_FILES += \
-    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/vendor/etc/media_codecs_google_audio.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/vendor/etc/media_codecs_google_telephony.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/vendor/etc/media_codecs_google_video.xml
-
 # NFC
 PRODUCT_PACKAGES += \
     android.hardware.nfc@1.0-impl \
+    android.hardware.nfc@1.0-service \
     com.android.nfc_extras \
     Tag
-
-#    android.hardware.nfc@1.0-service \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/nfc/libnfc-brcm.conf:system/vendor/etc/libnfc-brcm.conf \
@@ -213,6 +220,11 @@ PRODUCT_PACKAGES += \
     libOmxVidcCommon \
     libstagefrighthw
 
+
+PRODUCT_COPY_FILES += \
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/vendor/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/vendor/etc/media_codecs_google_telephony.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/vendor/etc/media_codecs_google_video.xml
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power@1.0-service-qti
@@ -222,18 +234,6 @@ PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     libxml2
 
-# Ramdisk
-PRODUCT_PACKAGES += \
-    fstab.g3 \
-    init.g3.rc \
-    init.g3.power.rc \
-    init.g3.usb.rc \
-    init.msm8974.sensor.sh \
-    init.qcom.sh \
-    init.qcom.bt.sh \
-    init.baseband.sh \
-    init.sensors.sh \
-    ueventd.g3.rc
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
@@ -246,9 +246,8 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl
-
-#    android.hardware.sensors@1.0-service
+    android.hardware.sensors@1.0-impl \
+    android.hardware.sensors@1.0-service
 
 # Thermal
 PRODUCT_COPY_FILES += \
@@ -265,7 +264,8 @@ PRODUCT_PACKAGES += \
 # Wifi
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
-    hostapd \
     libwpa_client \
+    hostapd \
+    wificond \
     wpa_supplicant \
     wpa_supplicant.conf
